@@ -11,6 +11,7 @@ export const Task = styled.div`
   margin-bottom: 0.75rem;
 
   p {
+    flex: 1;
     font-size: 0.875rem;
     color: ${({theme}) => theme.colors.gray_100};
   }

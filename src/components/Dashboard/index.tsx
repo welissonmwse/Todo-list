@@ -22,6 +22,11 @@ export function Dashboard(){
     setTasks(state => [...state, task])
   }
 
+  function deleteTask(id: string){
+    const taskWithoutDeletedOne = tasks.filter(task => task.id !== id)
+    setTasks(taskWithoutDeletedOne)
+  }
+
   return(
     <C.Container>
       <Header/>
@@ -39,8 +44,13 @@ export function Dashboard(){
         </header>
         {tasks.length > 0 ? (
           <C.TodoList>
-            <Task/>
-            <Task/>
+            {tasks.map(task => (
+              <Task 
+                key={task.id} 
+                task={task} 
+                onDeleteTask={deleteTask}
+              />
+            ))}
           </C.TodoList>
         ):(
           <C.Content>

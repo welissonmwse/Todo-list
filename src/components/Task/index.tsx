@@ -3,12 +3,24 @@ import { Checkbox } from '../Checkbox'
 
 import * as C from './styles'
 
-export function Task(){
+interface TaskType{
+  id: string;
+  title: string;
+  isCompleted: boolean;
+}
+
+interface TaskProps {
+  task: TaskType;
+  onDeleteTask: (id: string) => void;
+}
+
+export function Task({task, onDeleteTask}: TaskProps){
+  
   return(
     <C.Task>
-      <Checkbox/>
-      <p>Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.</p>
-      <button>
+      <Checkbox checked={task.isCompleted}/>
+      <p>{task.title}</p>
+      <button onClick={() => onDeleteTask(task.id)}>
         <img src={TrashImg} alt="" />
       </button>
     </C.Task>
