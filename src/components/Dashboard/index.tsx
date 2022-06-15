@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Form } from '../Form'
 import { Header } from '../Header'
 
@@ -7,12 +8,25 @@ import ClipboardImg from '../../assets/clipboard.svg'
 import * as C from './styles'
 import { Task } from '../Task'
 
+interface TaskType{
+  id: string;
+  title: string;
+  isCompleted: boolean;
+}
+
 export function Dashboard(){
+
+  const [tasks, setTasks] = useState<TaskType[]>([])
+
+  function handleNewTask(task : TaskType){
+    setTasks(state => [...state, task])
+  }
+
   return(
     <C.Container>
       <Header/>
       <main>
-        <Form/>
+        <Form onNewTask={handleNewTask}/>
         <header>
           <div>
             <p>Tarefas criadas</p>
@@ -23,17 +37,20 @@ export function Dashboard(){
             <span>10</span>
           </div>
         </header>
-        {/* <C.Content>
-          <img src={ClipboardImg} alt="" />
-          <div>
-            <p>Você ainda não tem tarefas cadastradas</p>
-            <span>Crie tarefas e organize seus itens a fazer</span>
-          </div>
-        </C.Content> */}
-        <C.TodoList>
-          <Task/>
-          <Task/>
-        </C.TodoList>
+        {tasks.length > 0 ? (
+          <C.TodoList>
+            <Task/>
+            <Task/>
+          </C.TodoList>
+        ):(
+          <C.Content>
+            <img src={ClipboardImg} alt="" />
+            <div>
+              <p>Você ainda não tem tarefas cadastradas</p>
+              <span>Crie tarefas e organize seus itens a fazer</span>
+            </div>
+          </C.Content>
+        )}
       </main>
     </C.Container>
   )
