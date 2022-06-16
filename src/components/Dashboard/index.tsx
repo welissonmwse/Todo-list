@@ -27,6 +27,20 @@ export function Dashboard(){
     setTasks(taskWithoutDeletedOne)
   }
 
+  function toggleTaskCompleted(id: string){
+    const taskStatusCompleted = tasks.map(task => {
+      if(task.id === id){
+        return {
+          ...task,
+          isCompleted: !task.isCompleted
+        }
+      }
+      return task
+    })
+    console.log(taskStatusCompleted)
+    setTasks(taskStatusCompleted)
+  }
+
   return(
     <C.Container>
       <Header/>
@@ -49,6 +63,7 @@ export function Dashboard(){
                 key={task.id} 
                 task={task} 
                 onDeleteTask={deleteTask}
+                onToggleTaskCompleted={toggleTaskCompleted}
               />
             ))}
           </C.TodoList>

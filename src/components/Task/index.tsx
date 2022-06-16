@@ -1,4 +1,4 @@
-import TrashImg from '../../assets/trash.svg'
+import { Trash } from 'phosphor-react';
 import { Checkbox } from '../Checkbox'
 
 import * as C from './styles'
@@ -12,16 +12,20 @@ interface TaskType{
 interface TaskProps {
   task: TaskType;
   onDeleteTask: (id: string) => void;
+  onToggleTaskCompleted: (id: string) => void;
 }
 
-export function Task({task, onDeleteTask}: TaskProps){
+export function Task({task, onDeleteTask, onToggleTaskCompleted}: TaskProps){
   
   return(
-    <C.Task>
-      <Checkbox checked={task.isCompleted}/>
+    <C.Task isCompleted={task.isCompleted}>
+      <Checkbox 
+        checked={task.isCompleted} 
+        onClick={() => onToggleTaskCompleted(task.id)}
+      />
       <p>{task.title}</p>
-      <button onClick={() => onDeleteTask(task.id)}>
-        <img src={TrashImg} alt="" />
+      <button className="buttonTrash" onClick={() => onDeleteTask(task.id)}>
+        <Trash size={20}/>
       </button>
     </C.Task>
   )

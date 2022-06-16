@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const Task = styled.div`
+interface TaskProps{
+  isCompleted: boolean;
+}
+
+export const Task = styled.div<TaskProps>`
   display: flex;
   align-items: flex-start;
   gap: 1rem;
@@ -13,24 +17,27 @@ export const Task = styled.div`
   p {
     flex: 1;
     font-size: 0.875rem;
-    color: ${({theme}) => theme.colors.gray_100};
+    color: ${({theme, isCompleted}) => isCompleted ? theme.colors.gray_300 : theme.colors.gray_100};
+    text-decoration: ${({isCompleted}) => isCompleted ? 'line-through' : 'solid'}
   }
 
-  button {
+  .buttonTrash {
     background: transparent;
-    border: none;
-    padding: 5px;
-    border-radius: 4px;
+    border: 0;
+    line-height: 0;
+    border-radius: 2px;
+    transition: color .2s;
 
     &:hover{
       background: ${({theme}) => theme.colors.gray_400};
     }
-    
-    img {
-      &:hover{
-        color: ${({theme}) => theme.colors.danger};
 
-      }
+    svg {
+      color: ${({theme}) => theme.colors.gray_300};
+    }
+    
+    svg:hover{
+      color: ${({theme}) => theme.colors.danger};
     }
   }
 `
