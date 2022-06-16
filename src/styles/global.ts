@@ -2,6 +2,11 @@ import { createGlobalStyle } from "styled-components"
 
 
 export default createGlobalStyle`
+  :focus{
+    outline: transparent;
+    box-shadow: 0 0 4px ${({theme}) => theme.colors.blue_dark};
+  }
+
   * {
     margin: 0;
     padding: 0;

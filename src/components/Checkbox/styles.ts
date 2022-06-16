@@ -24,7 +24,7 @@ export const Checkbox = styled.button<CheckboxProps>`
   transition: all 0.2s;
 
   ${({checked}) => checked && css`
-    background-color: ${({theme}) => theme.colors.purple_dark};
+    background-color: ${({theme}) => theme.colors.blue_dark};
     border: none;
   `}
 
@@ -42,6 +42,6 @@ export const Checkbox = styled.button<CheckboxProps>`
   }
 
   &:hover {
-    background-color: ${({theme, checked}) => checked ? theme.colors.purple : theme.colors.blue_dark};
+    background-color: ${({theme, checked}) => checked ? theme.colors.blue : theme.colors.blue_dark};
   }
 `

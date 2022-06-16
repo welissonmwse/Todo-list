@@ -8,7 +8,7 @@ export const Form = styled.form`
   input{
     flex: 1;
     background: ${({theme}) => theme.colors.gray_500};
-    color: ${({theme}) => theme.colors.gray_300};
+    color: ${({theme}) => theme.colors.gray_100};
     border: 1px solid ${({theme}) => theme.colors.gray_700};
     border-radius: 8px;
     padding: 1rem;
