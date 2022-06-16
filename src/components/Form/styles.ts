@@ -14,6 +14,12 @@ export const Form = styled.form`
     padding: 1rem;
   }
 
+  @media (max-width: 600px) {
+    input {
+      width: 100%;
+    }
+  }
+
   button {
     display: flex;
     align-items: center;

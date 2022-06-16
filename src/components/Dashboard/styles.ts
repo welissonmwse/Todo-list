@@ -7,6 +7,7 @@ export const Container = styled.div`
     height: 12.5rem;
     margin: auto;
     margin-top: -1.6875rem;
+    padding: 0 1rem;
 
     header {
       display: flex;
