@@ -20,7 +20,7 @@ export function Dashboard(){
   const [countTasksCompleted, setTasksCompleted] = useState(0)
 
   function handleNewTask(task : TaskType){
-    setTasks(state => [...state, task])
+    setTasks(state => [task, ...state])
   }
 
   function deleteTask(id: string){
