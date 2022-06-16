@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from '../Form'
 import { Header } from '../Header'
 
@@ -17,6 +17,7 @@ interface TaskType{
 export function Dashboard(){
 
   const [tasks, setTasks] = useState<TaskType[]>([])
+  const [countTasksCompleted, setTasksCompleted] = useState(0)
 
   function handleNewTask(task : TaskType){
     setTasks(state => [...state, task])
@@ -37,9 +38,13 @@ export function Dashboard(){
       }
       return task
     })
-    console.log(taskStatusCompleted)
     setTasks(taskStatusCompleted)
   }
+
+  useEffect(() => {
+    const tasksCompleted = tasks.reduce((acc, task) => task.isCompleted === true ? acc + 1 : acc, 0)
+    setTasksCompleted(tasksCompleted)
+  },[tasks])
 
   return(
     <C.Container>
@@ -49,11 +54,19 @@ export function Dashboard(){
         <header>
           <div>
             <p>Tarefas criadas</p>
-            <span>0</span>
+            <span>{tasks.length}</span>
           </div>
           <div>
-            <p>Tarefas criadas</p>
-            <span>10</span>
+            <p>Concluídas</p>
+              {countTasksCompleted > 0 ? (
+                <span>
+                    {countTasksCompleted} de {tasks.length}
+                </span>
+              ) : (
+                <span>
+                    {countTasksCompleted}
+                </span>
+              )}
           </div>
         </header>
         {tasks.length > 0 ? (
