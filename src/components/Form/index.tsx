@@ -1,18 +1,11 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import AddImg from '../../assets/plus.svg'
+import { TaskContext } from '../../context/TaskContext';
 import * as C from './styles'
 
-interface Task{
-  id: string;
-  title: string;
-  isCompleted: boolean;
-}
-interface FormProps{
-  onNewTask: (task: Task) => void;
-}
-
-export function Form({onNewTask}: FormProps){
+export function Form(){
+  const { handleNewTask } = useContext(TaskContext)
   const [newTaskText, setNewTaskText] = useState('')
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>){
@@ -27,7 +20,7 @@ export function Form({onNewTask}: FormProps){
       isCompleted: false,
     }
 
-    onNewTask(task)
+    handleNewTask(task)
     setNewTaskText('')
   }
 

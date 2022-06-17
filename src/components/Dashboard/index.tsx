@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
-import { Form } from '../Form'
+import { useContext } from 'react'
+import { TaskContext } from '../../context/TaskContext'
 import { Header } from '../Header'
+import { Form } from '../Form'
+import { Task } from '../Task'
 
 import ClipboardImg from '../../assets/clipboard.svg'
 
 
 import * as C from './styles'
-import { Task } from '../Task'
 
 interface TaskType{
   id: string;
@@ -15,42 +16,12 @@ interface TaskType{
 }
 
 export function Dashboard(){
-
-  const [tasks, setTasks] = useState<TaskType[]>([])
-  const [countTasksCompleted, setTasksCompleted] = useState(0)
-
-  function handleNewTask(task : TaskType){
-    setTasks(state => [task, ...state])
-  }
-
-  function deleteTask(id: string){
-    const taskWithoutDeletedOne = tasks.filter(task => task.id !== id)
-    setTasks(taskWithoutDeletedOne)
-  }
-
-  function toggleTaskCompleted(id: string){
-    const taskStatusCompleted = tasks.map(task => {
-      if(task.id === id){
-        return {
-          ...task,
-          isCompleted: !task.isCompleted
-        }
-      }
-      return task
-    })
-    setTasks(taskStatusCompleted)
-  }
-
-  useEffect(() => {
-    const tasksCompleted = tasks.reduce((acc, task) => task.isCompleted === true ? acc + 1 : acc, 0)
-    setTasksCompleted(tasksCompleted)
-  },[tasks])
-
+  const {countTasksCompleted, tasks} = useContext(TaskContext)
   return(
     <C.Container>
       <Header/>
       <main>
-        <Form onNewTask={handleNewTask}/>
+        <Form/>
         <header>
           <div>
             <p>Tarefas criadas</p>
@@ -75,8 +46,6 @@ export function Dashboard(){
               <Task 
                 key={task.id} 
                 task={task} 
-                onDeleteTask={deleteTask}
-                onToggleTaskCompleted={toggleTaskCompleted}
               />
             ))}
           </C.TodoList>

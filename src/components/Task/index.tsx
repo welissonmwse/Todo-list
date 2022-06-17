@@ -1,5 +1,6 @@
+import { useContext } from 'react';
 import { Trash } from 'phosphor-react';
-import { Checkbox } from '../Checkbox'
+import { TaskContext } from '../../context/TaskContext';
 
 import * as C from './styles'
 
@@ -11,20 +12,24 @@ interface TaskType{
 
 interface TaskProps {
   task: TaskType;
-  onDeleteTask: (id: string) => void;
-  onToggleTaskCompleted: (id: string) => void;
 }
 
-export function Task({task, onDeleteTask, onToggleTaskCompleted}: TaskProps){
+export function Task({task}: TaskProps){
+  const {deleteTask, toggleTaskCompleted} = useContext(TaskContext)
   
   return(
     <C.Task isCompleted={task.isCompleted}>
-      <Checkbox 
+      <C.Checkbox 
         checked={task.isCompleted} 
-        onClick={() => onToggleTaskCompleted(task.id)}
+        onClick={() => toggleTaskCompleted(task.id)}
       />
+
       <p>{task.title}</p>
-      <button className="buttonTrash" onClick={() => onDeleteTask(task.id)}>
+      
+      <button 
+        className="buttonTrash" 
+        onClick={() => deleteTask(task.id)}
+      >
         <Trash size={20}/>
       </button>
     </C.Task>
