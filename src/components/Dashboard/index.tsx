@@ -1,22 +1,15 @@
-import { useContext } from 'react'
-import { TaskContext } from '../../context/TaskContext'
+import { useTasks } from '../../hooks/useTasks'
 import { Header } from '../Header'
 import { Form } from '../Form'
 import { Task } from '../Task'
 
 import ClipboardImg from '../../assets/clipboard.svg'
 
-
 import * as C from './styles'
 
-interface TaskType{
-  id: string;
-  title: string;
-  isCompleted: boolean;
-}
-
 export function Dashboard(){
-  const {countTasksCompleted, tasks} = useContext(TaskContext)
+  const {countTasksCompleted, tasks} = useTasks()
+  
   return(
     <C.Container>
       <Header/>

@@ -1,11 +1,13 @@
-import { ChangeEvent, FormEvent, useContext, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { useTasks } from '../../hooks/useTasks';
+
 import AddImg from '../../assets/plus.svg'
-import { TaskContext } from '../../context/TaskContext';
+
 import * as C from './styles'
 
 export function Form(){
-  const { handleNewTask } = useContext(TaskContext)
+  const { handleNewTask } = useTasks()
   const [newTaskText, setNewTaskText] = useState('')
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>){

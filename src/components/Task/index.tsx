@@ -1,6 +1,5 @@
-import { useContext } from 'react';
 import { Trash } from 'phosphor-react';
-import { TaskContext } from '../../context/TaskContext';
+import { useTasks } from '../../hooks/useTasks';
 
 import * as C from './styles'
 
@@ -15,7 +14,7 @@ interface TaskProps {
 }
 
 export function Task({task}: TaskProps){
-  const {deleteTask, toggleTaskCompleted} = useContext(TaskContext)
+  const {deleteTask, toggleTaskCompleted} = useTasks()
   
   return(
     <C.Task isCompleted={task.isCompleted}>
